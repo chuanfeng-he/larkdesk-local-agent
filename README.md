@@ -1,6 +1,6 @@
 # LarkDesk Local Agent
 
-一个本地优先的 TypeScript/Node.js 智能体工作台，面向飞书消息接入、网页大模型调度、任务审计、知识沉淀，以及本地编码 handoff / CLI 执行。
+一个本地优先、低成本、高可控的 TypeScript/Node.js 智能体工作台，面向飞书消息接入、网页大模型调度、任务审计、知识沉淀，以及本地编码 handoff / CLI 执行。
 
 它适合这几类场景：
 
@@ -11,6 +11,9 @@
 
 ## 项目亮点
 
+- 低成本可落地：默认可用网页 provider + 本地持久化会话，很多场景下几乎不需要额外 API 成本
+- 性能强：把不同模型和执行链拆开调度，复杂任务、编码任务、文档任务都能走更合适的路径
+- 高可控：任务路由、审批策略、工件产物、Provider 开关、提示词和选择器都能自己掌握
 - 飞书双接入：同时支持 `Webhook 推送` 和 `自建应用事件接收`
 - 本地优先：默认数据写入 `data/`，浏览器会话写入 `.profiles/`
 - 路由可控：按任务类型、风险、质量等级、预算选择 provider 与执行链
@@ -386,31 +389,6 @@ CODEX_ARGS=
 详细示例见：
 
 - [docs/extension-guide.md](./docs/extension-guide.md)
-
-## 隐私与开源发布建议
-
-本项目默认约定：
-
-- `.env` 不进仓库
-- `data/` 不进仓库
-- `.profiles/` 不进仓库
-- 常见数据库、日志、证书、文档二进制、压缩包默认忽略
-
-公开仓库前请再次确认这些内容没有被提交：
-
-- `FEISHU_APP_SECRET`
-- 任意 API Key
-- 浏览器 profile
-- 本地 SQLite 数据
-- 截图、导出文档、项目合同、客户资料
-- `task-artifacts` 中的真实业务产物
-
-建议发布前自检：
-
-```bash
-rg -n --hidden --glob '!node_modules' --glob '!.git' \
-  '(APP_SECRET|API_KEY|sk-|AIza|ghp_)' .
-```
 
 ## 测试与质量
 
