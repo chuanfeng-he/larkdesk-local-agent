@@ -1,0 +1,11 @@
+{
+  "name": "@office-agent/local-access",
+  "version": "0.1.0",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "dependencies": {
+    "@office-agent/core": "workspace:*"
+  }
+}

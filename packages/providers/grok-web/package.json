@@ -1,0 +1,12 @@
+{
+  "name": "@office-agent/grok-web",
+  "version": "0.1.0",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "dependencies": {
+    "@office-agent/core": "workspace:*",
+    "@office-agent/web-playwright": "workspace:*"
+  }
+}

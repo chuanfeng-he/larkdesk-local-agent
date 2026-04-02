@@ -1,0 +1,29 @@
+preferKeyboardSubmit: true
+
+promptTextarea:
+  - "div[contenteditable='true']"
+  - "div[contenteditable='true'][data-testid='chat-input']"
+  - "div[role='textbox'][data-testid='chat-input']"
+  - "textarea"
+  - "fieldset div[contenteditable='true']"
+  - "[contenteditable='true'][data-testid]"
+submitButton:
+  - "button[aria-label*='Send']"
+  - "button[aria-label*='send']"
+  - "button[type='submit']"
+  - "button:has(svg)"
+responseBlocks:
+  - ".font-claude-response"
+  - ".standard-markdown"
+  - ".prose"
+  - "[data-testid='chat-message-content']"
+  - "div[data-is-streaming] .prose"
+  - "main .prose"
+loggedInMarkers:
+  - "div[contenteditable='true']"
+  - "textarea"
+  - "main"
+loginButtons:
+  - "button:has-text('Sign in')"
+  - "a[href*='login']"
+  - "button:has-text('Continue with')"

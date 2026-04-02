@@ -1,0 +1,34 @@
+sessionDetectionTimeoutMs: 4000
+preferKeyboardSubmit: false
+
+promptTextarea:
+  - "textarea.message-input-textarea"
+  - "textarea"
+  - "div[contenteditable='true'][role='textbox']"
+  - "div[contenteditable='true']"
+submitButton:
+  - ".omni-button-content-btn"
+  - "button[type='submit']"
+  - "button[aria-label*='Send']"
+  - "button[aria-label*='发送']"
+  - "button:has(svg)"
+generationStopButtons:
+  - "button[aria-label*='Stop']"
+  - "button[aria-label*='停止']"
+responseBlocks:
+  - ".qwen-chat-message-assistant .response-message-content.phase-answer"
+  - ".qwen-chat-message-assistant .custom-qwen-markdown"
+  - ".qwen-chat-message-assistant .qwen-markdown"
+loggedInMarkers:
+  - "textarea.message-input-textarea"
+  - ".main-content"
+  - "textarea"
+  - "div[contenteditable='true'][role='textbox']"
+  - "main"
+loginButtons:
+  - "button:has-text('登录')"
+  - "button:has-text('Sign in')"
+  - "a[href*='login']"
+blockedTextPatterns:
+  - "安全验证"
+  - "请先登录"

@@ -1,0 +1,40 @@
+sessionDetectionTimeoutMs: 4000
+preferKeyboardSubmit: false
+
+promptTextarea:
+  - "div[contenteditable='true'][role='textbox'][aria-label*='Gemini']"
+  - "rich-textarea .ql-editor[role='textbox']"
+  - ".ql-editor.textarea.new-input-ui"
+  - "textarea"
+  - "div[contenteditable='true']"
+  - ".ql-editor"
+submitButton:
+  - "button.send-button:not(.stop)"
+  - "button.send-button.submit"
+  - "button[aria-label='发送']"
+  - "button[type='submit']"
+  - "button[aria-label*='Send']"
+  - "button[mat-icon-button]"
+generationStopButtons:
+  - "button.send-button.stop"
+responseBlocks:
+  - "structured-content-container"
+  - "model-response"
+  - ".response-content"
+  - "message-content"
+  - ".markdown"
+  - ".model-response-text"
+loggedInMarkers:
+  - "div[contenteditable='true'][role='textbox'][aria-label*='Gemini']"
+  - "rich-textarea"
+  - "infinite-scroller[data-test-id='chat-history-container']"
+  - "[data-test-id='chat-history-container']"
+loginButtons:
+  - "button:has-text('Sign in')"
+  - "a[href*='signin']"
+  - "button:has-text('登录')"
+blockedUrlPatterns:
+  - "google.com/sorry"
+blockedTextPatterns:
+  - "我们的系统检测到您的计算机网络中存在异常流量"
+  - "unusual traffic"

@@ -1,0 +1,22 @@
+promptTextarea:
+  - "textarea"
+  - "textarea[placeholder]"
+  - "div[contenteditable='true']"
+  - ".chat-input textarea"
+submitButton:
+  - "button[type='submit']"
+  - "button:has(svg)"
+  - "button[aria-label*='发送']"
+responseBlocks:
+  - ".markdown"
+  - ".ds-markdown"
+  - ".message-content"
+  - "[data-role='assistant'] .markdown"
+loggedInMarkers:
+  - "textarea"
+  - "div[contenteditable='true']"
+  - ".chat-input"
+loginButtons:
+  - "button:has-text('登录')"
+  - "button:has-text('Sign in')"
+  - "a[href*='login']"

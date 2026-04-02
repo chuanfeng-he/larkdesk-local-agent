@@ -1,0 +1,12 @@
+{
+  "name": "@office-agent/executors",
+  "version": "0.1.0",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "dependencies": {
+    "@office-agent/core": "workspace:*",
+    "pptxgenjs": "^3.12.0"
+  }
+}

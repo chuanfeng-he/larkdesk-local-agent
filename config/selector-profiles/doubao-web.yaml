@@ -1,0 +1,36 @@
+sessionDetectionTimeoutMs: 15000
+preferKeyboardSubmit: false
+rejectPromptEcho: true
+promptEchoMinExtraChars: 180
+
+promptTextarea:
+  - "[data-testid='chat_input_input']"
+  - "textarea[data-testid='chat_input_input']"
+  - "textarea[placeholder*='发消息']"
+  - "textarea"
+  - "textarea[placeholder]"
+  - "div[contenteditable='true']"
+  - ".semi-input-textarea textarea"
+submitButton:
+  - "[data-testid='chat_input_send_button']"
+  - "[data-testid='chat_input'] button[type='submit']"
+  - "[data-testid='chat_input'] button[aria-label*='发送']"
+  - "button[type='submit']"
+  - "button[aria-label*='发送']"
+  - "button:has(svg)"
+responseBlocks:
+  - "[data-testid='receive_message'] [data-testid='message_text_content']"
+  - "[data-testid='message_text_content']"
+  - "[data-testid='receive_message']"
+loggedInMarkers:
+  - "[data-testid='chat_input_input']"
+  - "[data-testid='chat_input']"
+  - "[placeholder*='发消息']"
+  - "textarea"
+  - "div[contenteditable='true']"
+  - ".semi-input-textarea"
+loginButtons:
+  - "[data-testid='to_login_button']"
+  - "button:has-text('登录')"
+  - "button:has-text('注册')"
+  - "a[href*='login']"

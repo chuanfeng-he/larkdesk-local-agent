@@ -1,0 +1,14 @@
+{
+  "name": "@office-agent/web-playwright",
+  "version": "0.1.0",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "dependencies": {
+    "@office-agent/core": "workspace:*",
+    "playwright": "^1.51.1",
+    "yaml": "^2.7.1"
+  }
+}
+

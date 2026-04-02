@@ -1,0 +1,16 @@
+# 推荐一次性安装（CPU 版 PyTorch，体积小，与 EasyOCR 的 gpu=False 一致）：
+#   bash install-deps.sh
+#
+# 或手动分两步：
+#   python3 -m pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
+#   python3 -m pip install -i https://pypi.org/simple -r requirements.txt
+#
+gradio>=4.44.0
+easyocr>=1.7.0
+opencv-python-headless
+numpy
+Pillow
+# 若环境变量里配置了 SOCKS 代理（如 ALL_PROXY=socks5://...），httpx 需要 socksio，否则 import gradio 会报错
+socksio
+# 注意：不要在此处写 torch/torchvision，否则 pip 可能装到带 CUDA 的超大轮子。
+# 请先按上面用 PyTorch 官方 CPU 源安装，再装本文件其余包。

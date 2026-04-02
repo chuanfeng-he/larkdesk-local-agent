@@ -1,0 +1,133 @@
+defaults:
+  budget:
+    default: standard
+    multiReviewerMinBudget: high
+  review:
+    defaultCount: 1
+    upgradedCount: 2
+  presets:
+    simple: standard
+    office: standard
+    artifact: pro
+    review: pro
+    arbiter: pro
+    audit: pro
+    highRisk: expert
+    strictQuality: deep
+  audit:
+    maxAttempts: 6
+    lowRiskProviders:
+      - qwen_web
+      - doubao_web
+      - deepseek_web
+      - claude_web
+      - gemini_web
+      - chatgpt_web
+    mediumRiskProviders:
+      - qwen_web
+      - doubao_web
+      - claude_web
+      - gemini_web
+      - chatgpt_web
+      - deepseek_web
+    highRiskProviders:
+      - claude_web
+      - gemini_web
+      - chatgpt_web
+      - qwen_web
+      - grok_web
+      - doubao_web
+      - deepseek_web
+    criticalRiskProviders:
+      - claude_web
+      - gemini_web
+      - chatgpt_web
+      - grok_web
+      - qwen_web
+      - doubao_web
+      - deepseek_web
+
+simple:
+  cheapProviders:
+    - gemini_api
+    - doubao_web
+    - deepseek_web
+    - qwen_web
+    - mock_provider
+  fallbackProviders:
+    - gemini_api
+    - deepseek_web
+    - doubao_web
+    - qwen_web
+    - grok_web
+    - mock_provider
+
+office:
+  draftProvider: doubao_web
+  fallbackProviders:
+    - qwen_web
+    - deepseek_web
+  reviewer: deepseek_web
+  extraReviewers:
+    - gemini_web
+    - claude_web
+    - qwen_web
+    - grok_web
+  finalArbiter: doubao_web
+
+doc:
+  draftProvider: doubao_web
+  fallbackProviders:
+    - qwen_web
+    - deepseek_web
+  reviewer: deepseek_web
+  extraReviewers:
+    - gemini_web
+    - claude_web
+    - qwen_web
+    - grok_web
+  finalArbiter: doubao_web
+  executor: doc_markdown
+
+image:
+  draftProvider: doubao_web
+  reviewer: deepseek_web
+  extraReviewers:
+    - gemini_web
+    - qwen_web
+    - grok_web
+  finalArbiter: doubao_web
+  executor: image_prompt
+
+ppt:
+  draftProvider: doubao_web
+  reviewer: deepseek_web
+  extraReviewers:
+    - gemini_web
+    - claude_web
+    - qwen_web
+    - grok_web
+  finalArbiter: doubao_web
+  executor: ppt_markdown
+
+video:
+  draftProvider: doubao_web
+  reviewer: deepseek_web
+  extraReviewers:
+    - gemini_web
+    - qwen_web
+    - grok_web
+  finalArbiter: doubao_web
+  executor: video_plan
+
+coding:
+  draftProvider: deepseek_web
+  reviewer: doubao_web
+  extraReviewers:
+    - gemini_web
+    - claude_web
+    - qwen_web
+    - grok_web
+  finalArbiter: deepseek_web
+  codex:
+    autoRun: false

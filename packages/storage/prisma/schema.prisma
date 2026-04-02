@@ -1,0 +1,135 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Task {
+  id             String     @id @default(cuid())
+  type           String
+  status         String
+  source         String
+  sourceMetaJson String?
+  userInput      String
+  normalizedInput String
+  summary        String?
+  outputSummary  String?
+  resultJson     String?
+  error          String?
+  cacheKey       String?
+  createdAt      DateTime   @default(now())
+  updatedAt      DateTime   @updatedAt
+  completedAt    DateTime?
+  steps          TaskStep[]
+  knowledgeEntries KnowledgeEntry[]
+  approvalRequests ApprovalRequest[]
+
+  @@index([status, createdAt])
+  @@index([cacheKey])
+}
+
+model TaskStep {
+  id            String   @id @default(cuid())
+  taskId        String
+  phase         String
+  provider      String?
+  status        String
+  inputSummary  String?
+  outputSummary String?
+  metaJson      String?
+  startedAt     DateTime @default(now())
+  endedAt       DateTime?
+  task          Task     @relation(fields: [taskId], references: [id], onDelete: Cascade)
+
+  @@index([taskId, startedAt])
+}
+
+model ProviderState {
+  id           String   @id @default(cuid())
+  name         String   @unique
+  status       String
+  lastError    String?
+  recoveryHint String?
+  metaJson     String?
+  updatedAt    DateTime @updatedAt
+  checkedAt    DateTime @default(now())
+}
+
+model CacheEntry {
+  id         String   @id @default(cuid())
+  key        String   @unique
+  taskType   String
+  valueJson  String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model KnowledgeEntry {
+  id             String   @id @default(cuid())
+  key            String   @unique
+  scope          String   @default("global")
+  kind           String
+  layer          String   @default("long_term")
+  title          String
+  content        String
+  summary        String?
+  tagsJson       String?
+  importance     Int      @default(50)
+  source         String?
+  sourceTaskId   String?
+  pinned         Boolean  @default(false)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  lastAccessedAt DateTime?
+  task           Task?    @relation(fields: [sourceTaskId], references: [id], onDelete: SetNull)
+
+  @@index([kind, updatedAt])
+  @@index([layer, updatedAt])
+  @@index([sourceTaskId])
+  @@index([pinned, updatedAt])
+}
+
+model ApprovalPolicy {
+  id                 String   @id @default(cuid())
+  key                String   @unique
+  name               String
+  description        String?
+  enabled            Boolean  @default(true)
+  mode               String
+  priority           Int      @default(100)
+  matchTaskTypesJson String?
+  matchIntentsJson   String?
+  matchArtifactsJson String?
+  matchRunnersJson   String?
+  matchKeywordsJson  String?
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+  approvalRequests   ApprovalRequest[]
+
+  @@index([enabled, priority])
+}
+
+model ApprovalRequest {
+  id           String   @id @default(cuid())
+  taskId       String?
+  policyKey    String?
+  kind         String
+  status       String   @default("pending")
+  summary      String
+  detail       String?
+  runner       String?
+  source       String?
+  decisionNote String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  decidedAt    DateTime?
+  task         Task?    @relation(fields: [taskId], references: [id], onDelete: SetNull)
+  policy       ApprovalPolicy? @relation(fields: [policyKey], references: [key], onDelete: SetNull)
+
+  @@index([status, createdAt])
+  @@index([taskId])
+  @@index([policyKey])
+}

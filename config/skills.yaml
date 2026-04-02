@@ -1,0 +1,86 @@
+skills:
+  - id: summarize
+    packId: knowledge
+    packName: 知识整理
+    packDescription: 负责总结、归纳、知识沉淀和上下文整理。
+    name: 总结
+    description: 输出简洁结论、摘要和结构化归纳。
+    enabled: true
+    weight: 0.55
+    intents: [qa, office_discussion, doc, ppt, video]
+    keywords: [总结, 概括, 摘要, 归纳]
+    resourceHints: [short_answer]
+    toolHints: [summary, memory_write]
+    promptHints: [先给结论，再给摘要。]
+    memoryLayers: [episodic, long_term]
+  - id: review_text
+    packId: governance
+    packName: 治理审核
+    packDescription: 负责审查、风险把关、修订建议和质量控制。
+    name: 审校
+    description: 补充问题点、风险点、修订建议与质量把关。
+    enabled: true
+    weight: 0.9
+    intents: [office_discussion, doc, ppt, video, coding]
+    keywords: [审核, 审查, 复核, review, 校对, 严谨]
+    resourceHints: [review_prompt]
+    toolHints: [audit, approval]
+    promptHints: [优先指出风险、边界和需要修订的地方。]
+    memoryLayers: [working, episodic]
+  - id: code_generate
+    packId: coding_ops
+    packName: 代码执行
+    packDescription: 负责代码修改、本地执行、测试与工程交付。
+    name: 代码生成
+    description: 生成代码方案、实施步骤和 Codex handoff。
+    enabled: true
+    weight: 1
+    taskTypes: [CODING]
+    intents: [coding]
+    resourceHints: [codex_bundle]
+    toolHints: [filesystem, terminal, test]
+    promptHints: [优先直接落地，不要只描述步骤。]
+    memoryLayers: [working, episodic]
+  - id: image_generation
+    packId: visual_media
+    packName: 视觉媒体
+    packDescription: 负责图片、截图、海报、封面等视觉产物。
+    name: 图片出图
+    description: 整理图片意图、风格、负面约束和图像执行产物。
+    enabled: true
+    weight: 1
+    artifactTypes: [image]
+    intents: [image]
+    keywords: [图片, 海报, 封面, 出图, 画一张]
+    resourceHints: [image_prompt]
+    toolHints: [image, screenshot]
+    promptHints: [需要图片时优先生成可回传的图像文件。]
+    memoryLayers: [working, episodic]
+  - id: image_analysis
+    packId: visual_media
+    packName: 视觉媒体
+    packDescription: 负责图片、截图、海报、封面等视觉产物。
+    name: 图像分析
+    description: 识别图像内容、构图问题和风格建议。
+    enabled: true
+    weight: 0.7
+    intents: [image]
+    keywords: [识图, 图像分析, 看图, 图片分析]
+    resourceHints: [vision]
+    toolHints: [image, vision]
+    promptHints: [分析图片时补充构图、可读性和风格意见。]
+    memoryLayers: [working, episodic]
+  - id: deployment_script
+    packId: coding_ops
+    packName: 代码执行
+    packDescription: 负责代码修改、本地执行、测试与工程交付。
+    name: 部署脚本
+    description: 生成部署命令、发布步骤和回滚建议。
+    enabled: true
+    weight: 0.95
+    taskTypes: [CODING]
+    keywords: [部署, 上线, 脚本, 发布, 回滚]
+    resourceHints: [shell_script]
+    toolHints: [terminal, deploy]
+    promptHints: [提供上线步骤时要包含回滚建议。]
+    memoryLayers: [episodic, long_term]

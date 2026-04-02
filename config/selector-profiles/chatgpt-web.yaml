@@ -1,0 +1,33 @@
+promptTextarea:
+  - "#prompt-textarea"
+  - "textarea[data-testid='prompt-textarea']"
+  - "textarea"
+  - "div[contenteditable='true']"
+submitButton:
+  - "button[data-testid='send-button']"
+  - "button[aria-label='Send prompt']"
+  - "button[aria-label='Send message']"
+generationStopButtons:
+  - "button[data-testid='stop-button']"
+  - "button[aria-label*='Stop']"
+  - "button[aria-label*='停止']"
+allowCompletionWhileGenerationStable: true
+stableTicksRequired: 3
+stableTicksWhileGenerating: 14
+responseBlocks:
+  - "div[data-message-author-role='assistant'] div.markdown"
+  - "div[data-message-author-role='assistant']"
+  - "main div.markdown"
+  - "div.markdown"
+  - "article[data-testid^='conversation-turn-'] div.markdown"
+  - "main article .markdown"
+  - "article"
+loggedInMarkers:
+  - "#prompt-textarea"
+  - "textarea"
+  - "main"
+  - "nav button[data-testid='profile-button']"
+loginButtons:
+  - "button[data-testid='login-button']"
+  - "a[href*='auth']"
+  - "button:has-text('Log in')"

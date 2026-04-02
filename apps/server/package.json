@@ -1,0 +1,30 @@
+{
+  "name": "@office-agent/server",
+  "version": "0.1.0",
+  "type": "module",
+  "dependencies": {
+    "@office-agent/chatgpt-web": "workspace:*",
+    "@office-agent/claude-web": "workspace:*",
+    "@office-agent/codex-runner": "workspace:*",
+    "@office-agent/core": "workspace:*",
+    "@office-agent/deepseek-web": "workspace:*",
+    "@office-agent/doubao-web": "workspace:*",
+    "@office-agent/executors": "workspace:*",
+    "@office-agent/feishu": "workspace:*",
+    "@office-agent/gemini-api": "workspace:*",
+    "@office-agent/gemini-web": "workspace:*",
+    "@office-agent/grok-web": "workspace:*",
+    "@office-agent/local-access": "workspace:*",
+    "@office-agent/mock-provider": "workspace:*",
+    "@office-agent/qwen-web": "workspace:*",
+    "@office-agent/storage": "workspace:*",
+    "@office-agent/web-playwright": "workspace:*",
+    "dotenv": "^16.4.7",
+    "fastify": "^5.2.1",
+    "zod": "^3.24.2"
+  },
+  "scripts": {
+    "dev": "node --import tsx src/index.ts",
+    "dev:watch": "tsx watch src/index.ts"
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "name": "larkdesk-local-agent",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "packageManager": "pnpm@10.6.0",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "postinstall": "pnpm --filter @office-agent/storage prisma:generate && pnpm init:local && pnpm init:db",
+    "init:local": "tsx scripts/init.ts",
+    "init:db": "tsx scripts/init-db.ts",
+    "dev": "pnpm --filter @office-agent/server dev",
+    "stack:up": "bash scripts/start-dev-stack.sh",
+    "stack:up:all": "bash scripts/start-all-services.sh",
+    "stack:down": "bash scripts/stop-dev-stack.sh",
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "demo:mock": "tsx scripts/demo.ts",
+    "provider:login": "tsx scripts/provider-login.ts",
+    "playwright:install": "pnpm exec playwright install chromium",
+    "playwright:install:firefox": "pnpm exec playwright install firefox"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.14",
+    "playwright": "^1.51.1",
+    "sql.js": "^1.13.0",
+    "tsx": "^4.19.3",
+    "typescript": "^5.8.2",
+    "vitest": "^3.1.1",
+    "yaml": "^2.7.1"
+  }
+}

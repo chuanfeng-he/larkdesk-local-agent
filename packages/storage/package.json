@@ -1,0 +1,20 @@
+{
+  "name": "@office-agent/storage",
+  "version": "0.1.0",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "dependencies": {
+    "@office-agent/core": "workspace:*",
+    "@prisma/client": "^6.5.0"
+  },
+  "devDependencies": {
+    "prisma": "^6.5.0"
+  },
+  "scripts": {
+    "prisma:generate": "prisma generate --schema prisma/schema.prisma",
+    "prisma:db-push": "prisma db push --schema prisma/schema.prisma --skip-generate"
+  }
+}
+

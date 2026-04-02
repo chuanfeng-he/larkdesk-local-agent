@@ -1,0 +1,49 @@
+roles:
+  - id: crown_orchestrator
+    title: 舰长
+    responsibility: 总领任务编排、决策状态流转与升级策略。
+    preferredCapabilities: []
+    preferredTiers: [mid, strong]
+    supportsHotSwap: false
+  - id: zhongshu_drafter
+    title: 首席科学官
+    responsibility: 负责首稿生成、任务拆解和初始方案输出。
+    preferredCapabilities: [cheap_chat, office_draft, doc_draft, image_draft, ppt_draft, video_draft, coding_draft]
+    preferredTiers: [cheap, mid, strong]
+    supportsHotSwap: true
+  - id: hanlin_reviewer
+    title: 大副
+    responsibility: 负责复审、补充边界条件和指出事实风险。
+    preferredCapabilities: [office_review, doc_review, image_review, ppt_review, video_review, coding_review]
+    preferredTiers: [mid, strong]
+    supportsHotSwap: true
+  - id: menxia_auditor
+    title: 安全官
+    responsibility: 负责制度化审核、质量门禁和驳回意见输出。
+    preferredCapabilities: [office_review, office_arbiter, coding_review, coding_arbiter]
+    preferredTiers: [strong]
+    supportsHotSwap: true
+  - id: zhongshu_arbiter
+    title: 通讯官
+    responsibility: 负责整合多方意见并产出最终统一答复。
+    preferredCapabilities: [office_arbiter, coding_arbiter]
+    preferredTiers: [strong]
+    supportsHotSwap: true
+  - id: shangshu_executor
+    title: 轮机长
+    responsibility: 负责文档、PPT、图片、视频等产物执行落地。
+    preferredCapabilities: []
+    preferredTiers: [mid, strong]
+    supportsHotSwap: false
+  - id: junji_implementer
+    title: 导航员
+    responsibility: 负责编码实施、Codex 交接与测试收口。
+    preferredCapabilities: [coding_draft, coding_review, coding_arbiter]
+    preferredTiers: [strong]
+    supportsHotSwap: true
+  - id: sitian_monitor
+    title: 瞭望塔
+    responsibility: 负责监控心跳、事件观测、告警与人工干预入口。
+    preferredCapabilities: []
+    preferredTiers: [cheap, mid, strong]
+    supportsHotSwap: false

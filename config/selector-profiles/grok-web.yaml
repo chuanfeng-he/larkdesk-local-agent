@@ -1,0 +1,42 @@
+sessionDetectionTimeoutMs: 4000
+preferKeyboardSubmit: false
+
+promptTextarea:
+  - "form .tiptap.ProseMirror[contenteditable='true']"
+  - "form div[contenteditable='true']"
+  - "form [role='textbox']"
+  - "form textarea"
+  - "textarea"
+  - "div[contenteditable='true'][role='textbox']"
+  - "div[contenteditable='true']"
+submitButton:
+  - "button[aria-label='Submit']"
+  - "button[data-testid='grokImgGen']"
+  - "button[type='submit']"
+  - "button[aria-label*='Send']"
+  - "button[aria-label*='发送']"
+  - "button:has(svg)"
+generationStopButtons:
+  - "button[aria-label='Cancel']"
+  - "button[aria-label*='Stop']"
+  - "button[aria-label*='停止']"
+responseBlocks:
+  - ".response-content-markdown"
+  - ".message-bubble .response-content-markdown"
+  - ".message-bubble p.break-words"
+  - "main [data-role='assistant']"
+loggedInMarkers:
+  - "form .tiptap.ProseMirror[contenteditable='true']"
+  - "form textarea"
+  - "button[aria-label='Submit']"
+  - "button[aria-label='Model select']"
+  - "textarea"
+loginButtons:
+  - "button:has-text('Log in')"
+  - "button:has-text('Sign in')"
+  - "a[href='/login']"
+  - "a[href*='login']"
+blockedTextPatterns:
+  - "Log in"
+  - "Sign in"
+  - "Sorry, you have been blocked"

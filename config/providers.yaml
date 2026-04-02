@@ -1,0 +1,798 @@
+providers:
+  - name: gemini_api
+    enabled: true
+    tier: free
+    capabilities:
+      - cheap_chat
+      - office_draft
+      - coding_draft
+      - doc_draft
+      - ppt_draft
+    mode: api
+    allowedDomains: []
+    headless: true
+    timeoutMs: 30000
+    maxConcurrency: 5
+    rateLimitPerMinute: 15
+    defaultPreset: standard
+    metadata:
+      model: gemini-2.5-flash-lite
+    presets:
+      standard:
+        label: Gemini API 标准
+        reasoningIntensity: medium
+        costLevel: low
+        contextWindow: high
+        timeoutMs: 30000
+        fallbackPriority: 5
+      pro:
+        label: Gemini API 增强
+        reasoningIntensity: high
+        costLevel: low
+        contextWindow: high
+        timeoutMs: 45000
+        fallbackPriority: 4
+      expert:
+        label: Gemini API 专家
+        reasoningIntensity: very_high
+        costLevel: medium
+        contextWindow: high
+        timeoutMs: 60000
+        fallbackPriority: 3
+      deep:
+        label: Gemini API 深度
+        reasoningIntensity: very_high
+        costLevel: medium
+        contextWindow: very_high
+        timeoutMs: 90000
+        fallbackPriority: 2
+
+  - name: mock_provider
+    enabled: true
+    tier: cheap
+    capabilities:
+      - cheap_chat
+      - office_draft
+      - office_review
+      - office_arbiter
+      - coding_draft
+      - coding_review
+      - coding_arbiter
+      - doc_draft
+      - doc_review
+      - image_draft
+      - image_review
+      - ppt_draft
+      - ppt_review
+      - video_draft
+      - video_review
+    mode: persistent
+    allowedDomains: []
+    headless: true
+    timeoutMs: 10000
+    maxConcurrency: 2
+    rateLimitPerMinute: 30
+    defaultPreset: standard
+    presets:
+      standard:
+        label: 演示标准
+        reasoningIntensity: low
+        costLevel: low
+        contextWindow: small
+        timeoutMs: 10000
+        fallbackPriority: 100
+
+  - name: chatgpt_web
+    enabled: true
+    tier: strong
+    capabilities:
+      - office_arbiter
+      - coding_arbiter
+      - doc_review
+      - ppt_review
+    mode: cdp
+    browser: chromium
+    cdpEndpoint: http://127.0.0.1:9222
+    baseUrl: https://chatgpt.com/
+    selectorProfile: selector-profiles/chatgpt-web.yaml
+    allowedDomains:
+      - chatgpt.com
+      - chat.openai.com
+      - openai.com
+      - oaistatic.com
+      - oaiusercontent.com
+    headless: false
+    timeoutMs: 90000
+    maxConcurrency: 1
+    rateLimitPerMinute: 8
+    defaultPreset: standard
+    presets:
+      standard:
+        label: 标准模式
+        reasoningIntensity: medium
+        costLevel: medium
+        contextWindow: high
+        timeoutMs: 90000
+        fallbackPriority: 40
+        uiMode:
+          modelSlug: standard
+          reasoningMode: standard
+          openMenuSelectors:
+            - "button[data-testid='model-switcher-dropdown-button']"
+            - "button[aria-label='模型选择器']"
+            - "button[aria-label='Model selector']"
+          optionSelectors:
+            - "[data-testid='model-switcher-gpt-5-3']"
+            - "[role='menuitem']"
+          optionText: "Instant"
+      pro:
+        label: 增强模式
+        reasoningIntensity: high
+        costLevel: high
+        contextWindow: high
+        timeoutMs: 120000
+        fallbackPriority: 30
+        uiMode:
+          modelSlug: pro
+          reasoningMode: enhanced
+          openMenuSelectors:
+            - "button[data-testid='model-switcher-dropdown-button']"
+            - "button[aria-label='模型选择器']"
+            - "button[aria-label='Model selector']"
+          optionSelectors:
+            - "[data-testid='model-switcher-gpt-5-4-thinking']"
+            - "[role='menuitem']"
+          optionText: "Thinking"
+          verifySelectors:
+            - "div[data-testid='composer-footer-actions']:has-text('进阶思考')"
+      expert:
+        label: 专家模式
+        reasoningIntensity: very_high
+        costLevel: premium
+        contextWindow: very_high
+        timeoutMs: 150000
+        fallbackPriority: 20
+        uiMode:
+          modelSlug: advanced
+          reasoningMode: expert
+          openMenuSelectors:
+            - "button[data-testid='model-switcher-dropdown-button']"
+            - "button[aria-label='模型选择器']"
+            - "button[aria-label='Model selector']"
+          optionSelectors:
+            - "[data-testid='model-switcher-gpt-5-4-thinking']"
+            - "[role='menuitem']"
+          optionText: "Thinking"
+          verifySelectors:
+            - "div[data-testid='composer-footer-actions']:has-text('进阶思考')"
+      deep:
+        label: 深度思考
+        reasoningIntensity: very_high
+        costLevel: premium
+        contextWindow: very_high
+        timeoutMs: 180000
+        fallbackPriority: 10
+        uiMode:
+          modelSlug: advanced
+          reasoningMode: deep
+          openMenuSelectors:
+            - "button[data-testid='model-switcher-dropdown-button']"
+            - "button[aria-label='模型选择器']"
+            - "button[aria-label='Model selector']"
+          optionSelectors:
+            - "[data-testid='model-switcher-gpt-5-4-thinking']"
+            - "[role='menuitem']"
+          optionText: "Thinking"
+          verifySelectors:
+            - "div[data-testid='composer-footer-actions']:has-text('进阶思考')"
+
+  - name: deepseek_web
+    enabled: true
+    tier: cheap
+    capabilities:
+      - cheap_chat
+      - office_draft
+      - coding_draft
+      - doc_draft
+      - image_review
+      - ppt_draft
+      - video_review
+    mode: cdp
+    browser: chromium
+    browserChannel: msedge
+    cdpEndpoint: http://127.0.0.1:9228
+    profileDir: ./.profiles/deepseek
+    baseUrl: https://chat.deepseek.com/
+    selectorProfile: selector-profiles/deepseek-web.yaml
+    allowedDomains:
+      - deepseek.com
+      - chat.deepseek.com
+    headless: false
+    timeoutMs: 90000
+    maxConcurrency: 1
+    rateLimitPerMinute: 8
+    defaultPreset: standard
+    presets:
+      standard:
+        label: 标准模式
+        reasoningIntensity: low
+        costLevel: low
+        contextWindow: medium
+        timeoutMs: 90000
+        fallbackPriority: 50
+      pro:
+        label: 增强模式
+        reasoningIntensity: medium
+        costLevel: medium
+        contextWindow: medium
+        timeoutMs: 120000
+        fallbackPriority: 35
+      expert:
+        label: 专家模式
+        reasoningIntensity: high
+        costLevel: high
+        contextWindow: high
+        timeoutMs: 150000
+        fallbackPriority: 25
+      deep:
+        label: 深度思考
+        reasoningIntensity: high
+        costLevel: high
+        contextWindow: high
+        timeoutMs: 180000
+        fallbackPriority: 20
+
+  - name: doubao_web
+    enabled: true
+    tier: cheap
+    capabilities:
+      - cheap_chat
+      - office_draft
+      - doc_draft
+      - image_draft
+      - ppt_draft
+      - video_draft
+    mode: cdp
+    browser: chromium
+    cdpEndpoint: http://127.0.0.1:9224
+    profileDir: ./.profiles/doubao
+    baseUrl: https://www.doubao.com/chat/
+    selectorProfile: selector-profiles/doubao-web.yaml
+    allowedDomains:
+      - doubao.com
+      - www.doubao.com
+      - byteimg.com
+    headless: false
+    timeoutMs: 150000
+    maxConcurrency: 1
+    rateLimitPerMinute: 8
+    defaultPreset: standard
+    presets:
+      standard:
+        label: 标准模式
+        reasoningIntensity: low
+        costLevel: low
+        contextWindow: medium
+        timeoutMs: 120000
+        fallbackPriority: 45
+        uiMode:
+          modelSlug: standard
+          reasoningMode: standard
+          openMenuSelectors:
+            - "div[data-testid='deep-thinking-action-button'] button"
+            - "div[data-testid='deep-thinking-action-button']"
+          optionSelectors:
+            - "div[role='menuitem']"
+            - "[data-testid^='deep-thinking-action-item-']"
+          optionText: "快速"
+          verifySelectors:
+            - "div[data-testid='deep-thinking-action-button']:has-text('快速')"
+      pro:
+        label: 增强模式
+        reasoningIntensity: medium
+        costLevel: medium
+        contextWindow: medium
+        timeoutMs: 150000
+        fallbackPriority: 32
+        uiMode:
+          modelSlug: pro
+          reasoningMode: enhanced
+          openMenuSelectors:
+            - "div[data-testid='deep-thinking-action-button'] button"
+            - "div[data-testid='deep-thinking-action-button']"
+          optionSelectors:
+            - "div[role='menuitem']"
+            - "[data-testid^='deep-thinking-action-item-']"
+          optionText: "思考"
+          verifySelectors:
+            - "div[data-testid='deep-thinking-action-button']:has-text('思考')"
+      expert:
+        label: 专家模式
+        reasoningIntensity: high
+        costLevel: high
+        contextWindow: high
+        timeoutMs: 165000
+        fallbackPriority: 24
+        uiMode:
+          modelSlug: expert
+          reasoningMode: expert
+          openMenuSelectors:
+            - "div[data-testid='deep-thinking-action-button'] button"
+            - "div[data-testid='deep-thinking-action-button']"
+          optionSelectors:
+            - "div[role='menuitem']"
+            - "[data-testid^='deep-thinking-action-item-']"
+          optionText: "专家"
+          verifySelectors:
+            - "div[data-testid='deep-thinking-action-button']:has-text('专家')"
+      deep:
+        label: 深度思考
+        reasoningIntensity: high
+        costLevel: high
+        contextWindow: high
+        timeoutMs: 180000
+        fallbackPriority: 18
+        uiMode:
+          modelSlug: expert
+          reasoningMode: deep
+          openMenuSelectors:
+            - "div[data-testid='deep-thinking-action-button'] button"
+            - "div[data-testid='deep-thinking-action-button']"
+          optionSelectors:
+            - "div[role='menuitem']"
+            - "[data-testid^='deep-thinking-action-item-']"
+          optionText: "专家"
+          verifySelectors:
+            - "div[data-testid='deep-thinking-action-button']:has-text('专家')"
+
+  - name: gemini_web
+    enabled: true
+    tier: mid
+    capabilities:
+      - office_review
+      - coding_review
+      - doc_review
+      - image_review
+      - ppt_review
+      - video_review
+    mode: cdp
+    browser: chromium
+    cdpEndpoint: http://127.0.0.1:9223
+    baseUrl: https://gemini.google.com/app
+    selectorProfile: selector-profiles/gemini-web.yaml
+    allowedDomains:
+      - gemini.google.com
+      - google.com
+      - gstatic.com
+      - googleusercontent.com
+      - googleapis.com
+    headless: false
+    timeoutMs: 90000
+    maxConcurrency: 1
+    rateLimitPerMinute: 8
+    defaultPreset: standard
+    presets:
+      standard:
+        label: 标准模式
+        reasoningIntensity: medium
+        costLevel: medium
+        contextWindow: high
+        timeoutMs: 90000
+        fallbackPriority: 34
+        uiMode:
+          modelSlug: standard
+          reasoningMode: standard
+          openMenuSelectors:
+            - "button[data-test-id='bard-mode-menu-button']"
+            - "button[aria-label='打开模式选择器']"
+          optionSelectors:
+            - "div[role='menu'] button[role='menuitem']"
+            - "button[role='menuitem']"
+          optionText: "快速"
+          verifySelectors:
+            - "button[data-test-id='bard-mode-menu-button']:has-text('快速')"
+            - "button[aria-label='打开模式选择器']:has-text('快速')"
+      pro:
+        label: 增强模式
+        reasoningIntensity: high
+        costLevel: high
+        contextWindow: high
+        timeoutMs: 120000
+        fallbackPriority: 24
+        uiMode:
+          modelSlug: pro
+          reasoningMode: enhanced
+          openMenuSelectors:
+            - "button[data-test-id='bard-mode-menu-button']"
+            - "button[aria-label='打开模式选择器']"
+          optionSelectors:
+            - "div[role='menu'] button[role='menuitem']"
+            - "button[role='menuitem']"
+          optionText: "思考"
+          verifySelectors:
+            - "button[data-test-id='bard-mode-menu-button']:has-text('思考')"
+            - "button[aria-label='打开模式选择器']:has-text('思考')"
+      expert:
+        label: 专家模式
+        reasoningIntensity: very_high
+        costLevel: premium
+        contextWindow: very_high
+        timeoutMs: 150000
+        fallbackPriority: 16
+        uiMode:
+          modelSlug: pro
+          reasoningMode: expert
+          openMenuSelectors:
+            - "button[data-test-id='bard-mode-menu-button']"
+            - "button[aria-label='打开模式选择器']"
+          optionSelectors:
+            - "div[role='menu'] button[role='menuitem']"
+            - "button[role='menuitem']"
+          optionText: "使用 3.1 Pro"
+          verifySelectors:
+            - "button[data-test-id='bard-mode-menu-button']:has-text('Pro')"
+            - "button[aria-label='打开模式选择器']:has-text('Pro')"
+      deep:
+        label: 深度思考
+        reasoningIntensity: very_high
+        costLevel: premium
+        contextWindow: very_high
+        timeoutMs: 180000
+        fallbackPriority: 12
+        uiMode:
+          modelSlug: pro
+          reasoningMode: deep
+          openMenuSelectors:
+            - "button[data-test-id='bard-mode-menu-button']"
+            - "button[aria-label='打开模式选择器']"
+          optionSelectors:
+            - "div[role='menu'] button[role='menuitem']"
+            - "button[role='menuitem']"
+          optionText: "使用 3.1 Pro"
+          verifySelectors:
+            - "button[data-test-id='bard-mode-menu-button']:has-text('Pro')"
+            - "button[aria-label='打开模式选择器']:has-text('Pro')"
+
+  - name: claude_web
+    enabled: true
+    tier: strong
+    capabilities:
+      - office_review
+      - office_arbiter
+      - coding_review
+      - coding_arbiter
+      - doc_review
+      - image_review
+      - ppt_review
+      - video_review
+    mode: cdp
+    browser: chromium
+    cdpEndpoint: http://127.0.0.1:9225
+    profileDir: ./.profiles/claude
+    baseUrl: https://claude.ai/new
+    selectorProfile: selector-profiles/claude-web.yaml
+    allowedDomains:
+      - claude.ai
+      - anthropic.com
+      - claudeusercontent.com
+    headless: false
+    timeoutMs: 90000
+    maxConcurrency: 1
+    rateLimitPerMinute: 8
+    defaultPreset: standard
+    presets:
+      standard:
+        label: 标准模式
+        reasoningIntensity: medium
+        costLevel: medium
+        contextWindow: high
+        timeoutMs: 90000
+        fallbackPriority: 28
+        uiMode:
+          modelSlug: sonnet
+          reasoningMode: standard
+          openMenuSelectors:
+            - "button[data-testid='model-selector-dropdown']"
+          optionSelectors:
+            - "div[role='menuitem']"
+          optionText: "Haiku 4.5"
+          verifySelectors:
+            - "button[data-testid='model-selector-dropdown']:has-text('Haiku 4.5')"
+      pro:
+        label: 增强模式
+        reasoningIntensity: high
+        costLevel: high
+        contextWindow: high
+        timeoutMs: 120000
+        fallbackPriority: 20
+        uiMode:
+          modelSlug: sonnet
+          reasoningMode: enhanced
+          openMenuSelectors:
+            - "button[data-testid='model-selector-dropdown']"
+          optionSelectors:
+            - "div[role='menuitem']"
+          optionText: "Sonnet 4.6"
+          verifySelectors:
+            - "button[data-testid='model-selector-dropdown']:has-text('Sonnet 4.6')"
+      expert:
+        label: 专家模式
+        reasoningIntensity: high
+        costLevel: high
+        contextWindow: high
+        timeoutMs: 150000
+        fallbackPriority: 14
+        uiMode:
+          modelSlug: sonnet
+          reasoningMode: expert
+          openMenuSelectors:
+            - "button[data-testid='model-selector-dropdown']"
+          optionSelectors:
+            - "div[role='menuitem']"
+          optionText: "Sonnet 4.6"
+          verifySelectors:
+            - "button[data-testid='model-selector-dropdown']:has-text('Sonnet 4.6')"
+      deep:
+        label: 深度思考
+        reasoningIntensity: high
+        costLevel: high
+        contextWindow: high
+        timeoutMs: 180000
+        fallbackPriority: 8
+        uiMode:
+          modelSlug: sonnet
+          reasoningMode: deep
+          openMenuSelectors:
+            - "button[data-testid='model-selector-dropdown']"
+          optionSelectors:
+            - "div[role='menuitem']"
+          optionText: "Sonnet 4.6"
+          verifySelectors:
+            - "button[data-testid='model-selector-dropdown']:has-text('Sonnet 4.6')"
+
+  - name: qwen_web
+    enabled: true
+    tier: mid
+    capabilities:
+      - cheap_chat
+      - office_draft
+      - office_review
+      - coding_draft
+      - coding_review
+      - doc_draft
+      - doc_review
+      - image_review
+      - ppt_draft
+      - ppt_review
+      - video_review
+    mode: cdp
+    browser: chromium
+    cdpEndpoint: http://127.0.0.1:9226
+    profileDir: ./.profiles/qwen-clean
+    baseUrl: https://chat.qwen.ai/
+    selectorProfile: selector-profiles/qwen-web.yaml
+    allowedDomains:
+      - chat.qwen.ai
+      - qwen.ai
+      - tongyi.com
+      - aliyun.com
+      - alicdn.com
+    headless: false
+    timeoutMs: 90000
+    maxConcurrency: 1
+    rateLimitPerMinute: 8
+    defaultPreset: standard
+    presets:
+      standard:
+        label: 标准模式
+        reasoningIntensity: low
+        costLevel: low
+        contextWindow: medium
+        timeoutMs: 90000
+        fallbackPriority: 36
+        uiMode:
+          modelSlug: standard
+          reasoningMode: standard
+          steps:
+            - openMenuSelectors:
+                - "div[class*='model-selector-text']"
+              optionSelectors:
+                - ".ant-dropdown [class*='model-item']"
+              optionText: "Qwen3.5-Flash"
+              verifySelectors:
+                - "div[class*='model-selector-text']:has-text('Qwen3.5-Flash')"
+            - directSelectors:
+                - "input.ant-select-selection-search-input"
+              optionSelectors:
+                - "[role='listbox'] [role='option']"
+              optionText: "自动"
+              verifySelectors:
+                - "div.message-input-wrapper-position:has-text('自动')"
+                - "div.message-input-wrapper:has-text('自动')"
+          verifySelectors:
+            - "div[class*='model-selector-text']:has-text('Qwen3.5-Flash')"
+      pro:
+        label: 增强模式
+        reasoningIntensity: medium
+        costLevel: medium
+        contextWindow: high
+        timeoutMs: 120000
+        fallbackPriority: 22
+        uiMode:
+          modelSlug: plus
+          reasoningMode: enhanced
+          steps:
+            - openMenuSelectors:
+                - "div[class*='model-selector-text']"
+              optionSelectors:
+                - ".ant-dropdown [class*='model-item']"
+              optionText: "Qwen3.5-Plus"
+              verifySelectors:
+                - "div[class*='model-selector-text']:has-text('Qwen3.5-Plus')"
+            - directSelectors:
+                - "input.ant-select-selection-search-input"
+              optionSelectors:
+                - "[role='listbox'] [role='option']"
+              optionText: "自动"
+              verifySelectors:
+                - "div.message-input-wrapper-position:has-text('自动')"
+                - "div.message-input-wrapper:has-text('自动')"
+          verifySelectors:
+            - "div[class*='model-selector-text']:has-text('Qwen3.5-Plus')"
+      expert:
+        label: 专家模式
+        reasoningIntensity: high
+        costLevel: high
+        contextWindow: high
+        timeoutMs: 150000
+        fallbackPriority: 16
+        uiMode:
+          modelSlug: plus
+          reasoningMode: expert
+          steps:
+            - openMenuSelectors:
+                - "div[class*='model-selector-text']"
+              optionSelectors:
+                - ".ant-dropdown [class*='model-item']"
+              optionText: "Qwen3.5-Plus"
+              verifySelectors:
+                - "div[class*='model-selector-text']:has-text('Qwen3.5-Plus')"
+            - directSelectors:
+                - "input.ant-select-selection-search-input"
+              optionSelectors:
+                - "[role='listbox'] [role='option']"
+              optionText: "思考"
+              verifySelectors:
+                - "div.message-input-wrapper-position:has-text('思考')"
+                - "div.message-input-wrapper:has-text('思考')"
+          verifySelectors:
+            - "div[class*='model-selector-text']:has-text('Qwen3.5-Plus')"
+      deep:
+        label: 深度思考
+        reasoningIntensity: high
+        costLevel: high
+        contextWindow: high
+        timeoutMs: 180000
+        fallbackPriority: 11
+        uiMode:
+          modelSlug: plus
+          reasoningMode: deep
+          steps:
+            - openMenuSelectors:
+                - "div[class*='model-selector-text']"
+              optionSelectors:
+                - ".ant-dropdown [class*='model-item']"
+              optionText: "Qwen3.5-397B-A17B"
+              verifySelectors:
+                - "div[class*='model-selector-text']:has-text('Qwen3.5-397B-A17B')"
+            - directSelectors:
+                - "input.ant-select-selection-search-input"
+              optionSelectors:
+                - "[role='listbox'] [role='option']"
+              optionText: "思考"
+              verifySelectors:
+                - "div.message-input-wrapper-position:has-text('思考')"
+                - "div.message-input-wrapper:has-text('思考')"
+          verifySelectors:
+            - "div[class*='model-selector-text']:has-text('Qwen3.5-397B-A17B')"
+
+  - name: grok_web
+    enabled: true
+    tier: strong
+    capabilities:
+      - office_review
+      - office_arbiter
+      - coding_review
+      - coding_arbiter
+      - doc_review
+      - image_review
+      - ppt_review
+      - video_review
+    mode: cdp
+    browser: chromium
+    cdpEndpoint: http://127.0.0.1:9227
+    profileDir: ./.profiles/grok-x
+    baseUrl: https://grok.com/
+    selectorProfile: selector-profiles/grok-web.yaml
+    allowedDomains:
+      - grok.com
+      - x.ai
+      - x.com
+      - twimg.com
+      - abs.twimg.com
+      - pbs.twimg.com
+      - video.twimg.com
+    headless: false
+    timeoutMs: 180000
+    maxConcurrency: 1
+    rateLimitPerMinute: 8
+    defaultPreset: standard
+    presets:
+      standard:
+        label: 标准模式
+        reasoningIntensity: medium
+        costLevel: medium
+        contextWindow: high
+        timeoutMs: 90000
+        fallbackPriority: 30
+        uiMode:
+          modelSlug: standard
+          reasoningMode: auto
+          openMenuSelectors:
+            - "button[aria-label='Model select']"
+          optionSelectors:
+            - "div[role='menuitem']"
+          optionText: "Auto"
+          verifySelectors:
+            - "button[aria-label='Model select']:has-text('Auto')"
+      pro:
+        label: 增强模式
+        reasoningIntensity: high
+        costLevel: high
+        contextWindow: high
+        timeoutMs: 120000
+        fallbackPriority: 22
+        uiMode:
+          modelSlug: premium
+          reasoningMode: auto
+          openMenuSelectors:
+            - "button[aria-label='Model select']"
+          optionSelectors:
+            - "div[role='menuitem']"
+          optionText: "Auto"
+          verifySelectors:
+            - "button[aria-label='Model select']:has-text('Auto')"
+      expert:
+        label: 专家模式
+        reasoningIntensity: high
+        costLevel: high
+        contextWindow: high
+        timeoutMs: 150000
+        fallbackPriority: 14
+        uiMode:
+          modelSlug: premium
+          reasoningMode: expert
+          openMenuSelectors:
+            - "button[aria-label='Model select']"
+          optionSelectors:
+            - "div[role='menuitem']"
+          optionText: "Expert"
+          verifySelectors:
+            - "button[aria-label='Model select']:has-text('Expert')"
+      deep:
+        label: 深度思考
+        reasoningIntensity: high
+        costLevel: high
+        contextWindow: high
+        timeoutMs: 180000
+        fallbackPriority: 10
+        uiMode:
+          modelSlug: premium
+          reasoningMode: deep
+          openMenuSelectors:
+            - "button[aria-label='Model select']"
+          optionSelectors:
+            - "div[role='menuitem']"
+          optionText: "Expert"
+          verifySelectors:
+            - "button[aria-label='Model select']:has-text('Expert')"
